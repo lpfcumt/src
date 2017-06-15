@@ -1,0 +1,349 @@
+/* The following style conflicts with the obout progress image. */
+/*
+div.panel-body img {
+	width: 100%;
+}
+*/
+
+#SchoolImg {
+	max-height: 110px !important; 
+	max-width: 233px;
+}
+
+#inlinefield {
+	width: 50px;
+}
+
+a, a:hover, a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.dropdown-menu > li > a {
+	color:#303030 !important; /* Black color used for all sites */
+}
+
+a.list-group-item {
+	color:#303030 !important; /* Black color used for all sites */
+}
+
+a.fa.fa-chevron-down, a.fa.fa-chevron-up, a.fa.fa-times {
+	color: #b0b5b9 !important;
+}
+
+.panel-heading .nav > li > a {
+	color:#fff !important;
+	font-weight:200;
+}
+
+.form-signin a {
+	color:#97050d;
+}
+
+.state-overview .participant {
+	max-height: 20px;
+}
+
+.state-overview .participant {
+	max-height: 20px;
+	font-size: 30px;
+	
+}
+
+.state-overview .symbol.participant {
+	padding: 15px 15px 50px 15px
+}
+
+.state-overview .symbol.participant i {
+	font-size:30px;
+	padding: 5px 10px;
+}
+
+#participant-count {
+	width: 58%;
+	padding-top: 5px;
+}
+
+.pagination.nomargin {
+	margin-top:-15px;
+}
+
+#party {
+	font-size:3em;
+}
+
+/* JA Tweaks */
+/* Fix spacing issue in the footer */
+.site-footer address {
+    margin-bottom: 0;
+}
+.text-center address {
+	line-height: 1.5em;
+}
+
+/* Fix issue where a white background extends under the navigation menu*/
+.header nav.navbar {
+    margin-bottom: 0;
+}
+
+/* Fix text color of links styled as buttons */
+a.btn-primary, a.btn-default, a.btn-success, a.btn-danger {
+    color: #fff !important;
+}
+
+/* Fix pager text */
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+    color: #fff !important;
+}
+
+.autocomplete-desc {
+    font-size: 80%
+}
+
+div.form-control.sona-datepicker {
+    border: none;
+}
+
+.ms-selection .form-control-static {
+    height: 34px;
+}
+
+/* Question Control */
+table.QuestionChoiceListHorizontal
+{
+	width: 100%;
+}
+
+.QuestionChoiceListHorizontal td
+{
+	text-align: center;
+	vertical-align: top;
+}
+
+.QuestionChoiceListHorizontal td label
+{
+    font-weight: normal;
+}
+
+input.sona-autoselect[readonly] {
+    cursor: pointer;
+}
+
+/* Fixes a conflict between the datepicker-rtl and bootstrap-rtl.css. */
+.datepicker.datepicker-rtl {
+    right: auto !important;
+}
+
+/* Question list */
+ul.responses > li > ul {
+    padding-left: 40px;
+}
+
+/* Response list */
+ul.responses > li > ul > li > ul {
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* This gives the items a bit more room to breath when STACKED */
+#liner1 {
+	line-height:35px;
+}
+
+@media print {
+    a[href]:after {
+        content: none;
+    }
+
+    abbr[title]:after {
+        content: none;
+    }
+
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: none;
+    }
+}
+
+label {
+    font-weight: inherit;
+}
+
+.form-control {
+    color: #303030 !important;
+}
+
+.form-group.studies-selector-fix {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* admin_settings.aspx */
+.or-divider {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-control.force-inline {
+    display: inline-block;
+}
+
+/* admin_pt_section_edit.aspx */
+.question_choices {
+    margin-left: 40px;
+}
+
+/*Unseen Column*/
+ @media only screen and (max-width: 800px) {
+    #unseen table td:nth-child(2),
+    #unseen table th:nth-child(2) {display: none;}
+}
+
+@media only screen and (max-width: 640px) {
+    #unseen table td:nth-child(4),
+    #unseen table th:nth-child(4),
+    #unseen table td:nth-child(7),
+    #unseen table th:nth-child(7),
+    #unseen table td:nth-child(8),
+    #unseen table th:nth-child(8){display: none;}
+}
+
+/*flip-scroll*/
+
+@media only screen and (max-width: 992px) {
+    #flip-scroll .cf:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+    #flip-scroll * html .cf { zoom: 1; }
+    #flip-scroll *:first-child+html .cf { zoom: 1; }
+    #flip-scroll table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+
+    #flip-scroll th,
+    #flip-scroll td { margin: 0; vertical-align: top; }
+    #flip-scroll th { text-align: left; }
+    #flip-scroll table { display: block; position: relative; width: 100%; }
+    #flip-scroll thead { display: block; float: left; }
+    #flip-scroll tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
+    #flip-scroll thead tr { display: block; }
+    #flip-scroll th { display: block; text-align: right; }
+    #flip-scroll tbody tr { display: inline-block; vertical-align: top; }
+    #flip-scroll td { display: block; min-height: 1.25em; text-align: left; }
+
+
+    /* sort out borders */
+
+    #flip-scroll th { border-bottom: 0; border-left: 0; }
+    #flip-scroll td { border-left: 0; border-right: 0; border-bottom: 0; }
+    #flip-scroll tbody tr { border-left: 1px solid #babcbf; }
+    #flip-scroll th:last-child,
+    #flip-scroll td:last-child { border-bottom: 1px solid #babcbf; }
+}
+
+/*no more table*/
+
+@media only screen and (max-width: 992px) {
+    /* Force table to not be like tables anymore */
+    #no-more-tables table,
+    #no-more-tables thead,
+    #no-more-tables tbody,
+    #no-more-tables th,
+    #no-more-tables td,
+    #no-more-tables tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    #no-more-tables thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    #no-more-tables tr { border: 1px solid #ccc; }
+
+    #no-more-tables td {
+        /* Behave like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align:left;
+    }
+
+    #no-more-tables td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+
+    /*
+    Label the data
+    */
+    #no-more-tables td:before { content: attr(data-title); }
+}
+
+/* Lists */
+
+ul.standard.override, ul.ul-standard-override {
+    display: block !important;
+    list-style-type: disc !important;
+    margin-left: 40px;
+}
+
+ul.standard.override > li,
+ul.ul-standard-override > li {
+    display: list-item !important;
+    list-style: disc !important;
+}
+
+/* Upload alert */
+.upload-warning span {
+    color: #FFCC00 !important;
+}
+
+ul, ol {
+margin-top: 0;
+margin-bottom: 10px;
+padding-left: 30px;
+}
+
+.input-sm {
+font-size: 14px !important;
+}
+
+.modal-header {
+    background:<%=UIPrimaryColor%>; /* EMS_UI_PRIMARY_COLOR */
+    
+}
+
+/* Ensure that drop down lists are visibile at all resolutions */
+select.form-control {
+    -moz-min-width: 70px !important;
+    -ms-min-width: 70px !important;
+    -o-min-width: 70px !important;
+    -webkit-min-width: 70px !important;
+    min-width: 70px !important;
+}
+
+/* Fixes issues where times and borders are not displayed in the day and week views of the bootstrap-calendar */
+#cal-day-panel, .cal-week-box{
+    z-index: 0 !important;
+}
+
+/* Makes border of text and password inputs more prominent */
+.form-control {
+	border: 1px solid #CCCCCC !important;
+}
+
+/* For use with admin_hashcode to increase vertical bullet spacing */
+ul.spacing li {
+	margin-bottom: 5px;
+}

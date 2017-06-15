@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+     
+       
+    <package name="EMS1" extends="json-default">
+    <interceptors>
+           <!-- 先定义拦截器 -->
+
+           <interceptor name="myInterceptor" class="cn.EMS.interceptor.LoginInterceptor">
+
+           </interceptor>
+           <interceptor-stack name="myStack">              
+
+            <interceptor-ref name="myInterceptor">              
+
+           </interceptor-ref>               
+
+          <interceptor-ref name="defaultStack"></interceptor-ref>          
+
+            </interceptor-stack>       
+
+           
+       </interceptors>
+
+       <!-- 改变系统默认的拦截器,改成自己的默认拦截器,并且一个系统只能有一个默认的拦截器,这样这个拦截器栈会默认应用到所有的Action上去 -->
+       <default-interceptor-ref name="myStack">
+       </default-interceptor-ref>
+    <global-results>
+    <result name="login">WEB-INF/content/login.jsp</result>
+    </global-results>
+    </package>
+    
+	<package name="EMS" namespace="/" extends="EMS1" strict-method-invocation="false">
+        
+		<!--学生登陆、注册  -->
+		<action name="Check_*" class="cn.EMS.action.StudentsAction" method="{1}" >
+			<result name="{1}" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="StudentsLogin" class="cn.EMS.action.StudentsAction" method="StudentsLogin" >
+			<result name="error" type="chain">
+			      <param name="method">ListStudentsResent</param> 
+    				<param name="actionName">ListStudentsResent</param> 
+			    </result>
+		</action>
+		
+		<action name="addstudent" class="cn.EMS.action.StudentsAction"  method="StudentsRegister" >
+
+			<result name="success" type="redirect">login</result>
+
+		</action>
+	    <action name="return_*" class="cn.EMS.action.StudentsAction"  method="{1}" >
+
+			<result name="success" type="redirect">login</result>
+
+		</action>
+		<action name="massEmail" class="cn.EMS.action.StudentsAction"  method="massEmail" >
+
+			<result name="massEmail" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+
+		</action>
+		<!--老师登录登陆、注册、添加  -->
+		<action name="Check1_*" class="cn.EMS.action.TeachersAction" method="{1}" >
+			<result name="{1}" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="TeachersLogin" class="cn.EMS.action.TeachersAction" method="TeachersLogin" >
+			<result name="success" type="chain">ListResentExperiments</result>
+		</action>
+		<action name="AddTeachers" class="cn.EMS.action.TeachersAction"  method="TeachersRegister" >
+			<result name="success" type="chain">Adminteachersinfo</result>
+		</action>
+		<!--管理员查看、修改教师、学生信息  、最近实验-->
+		<action name="Admins1TeachersInfo" class="cn.EMS.action.TeachersAction" method="ListTeachersById" >
+			<result name="success" type="redirect">admin1resetTeachersinfo</result>
+		</action>
+		<action name="reset1Teachers" class="cn.EMS.action.TeachersAction" method="updateTeachersById" >
+			<result name="success" type="chain">ListAdminsRecent</result>
+		</action>
+		<action name="reset1Students" class="cn.EMS.action.StudentsAction" method="UpdateStudents" >
+			<result name="success" type="chain">ListAdminsRecent</result>
+		</action>
+		<action name="ListAdminsRecent" class="cn.EMS.action.ExperimentsAction" method="ListActiveExperiments" >
+			<result name="ListActiveExperiments" type="redirect">adminmain</result>
+		</action>
+		<!--老师修改  -->
+		<action name="ListTeachersInfo" class="cn.EMS.action.ExperimentsAction" method="ListTeachersInfo" >
+			<result name="success" type="redirect">teachersinfo</result>
+		</action>
+		<action name="UpdateTeachersPassword" class="cn.EMS.action.TeachersAction" method="UpdateTeachersPassword" >
+			<result name="UpdateTeachersPassword" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<!--学生修改邮箱、密码或忘记密码和修改状态 -->
+		<action name="changepass" class="cn.EMS.action.StudentsAction" method="UpdatePassword" >
+			<result name="success" type="redirect">login</result>
+		</action>
+		<action name="changeemail" class="cn.EMS.action.StudentsAction" method="UpdateEmail" >
+			<result name="success" type="chain">ListStudentsInfo</result>
+		</action>
+		<action name="ListStudentsInfo" class="cn.EMS.action.StudentsAction" method="ListStudentsById1" >
+			<result name="success" type="redirect">studentsinformation</result>
+		</action>
+		<action name="Forgetpass" method="ForgetPassword" class="cn.EMS.action.StudentsAction">
+        	<result name="ForgetPassword" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+        </action>
+        <action name="changestate" method="ActivStudents" class="cn.EMS.action.StudentsAction">
+            <result name="success" type="chain">Adminstudentsinfo</result>
+         </action>
+		<!--管理员登录登陆、注册  -->
+		<action name="Check2_*" class="cn.EMS.action.AdminsAction" method="{1}" >
+			<result name="{1}" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="AdminsLogin" class="cn.EMS.action.AdminsAction" method="AdminsLogin" >
+
+			<result name="success" type="chain">ListAdminsRecent</result>
+		</action>
+		<!--管理员查看实验、教师信息、学生信息 -->
+		<action name="Adminstudentsinfo" method="ListAllStudents" class="cn.EMS.action.StudentsAction">
+            <result name="success" type="redirect">adminstudentsinfo</result>
+         </action>
+         <action name="ListAllStudents1" method="ListAllStudents1" class="cn.EMS.action.StudentsAction">
+            <result name="ListAllStudents1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+         </action>
+         <action name="ListUnActiveStudents" method="ListUnActiveStudents" class="cn.EMS.action.StudentsAction">
+            <result name="ListUnActiveStudents" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+         </action>
+         <action name="ListUnActiveStudents1" method="ListUnActiveStudents1" class="cn.EMS.action.StudentsAction">
+            <result name="ListUnActiveStudents1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+         </action>
+         <action name="Adminteachersinfo" method="ListAllTeachers" class="cn.EMS.action.TeachersAction">
+            <result name="success" type="redirect">adminteachersinfo</result>
+         </action>
+         <action name="Adminallexperiment" method="ListAllExperiments" class="cn.EMS.action.ExperimentsAction">
+            <result name="ListAllExperiments" type="redirect">adminallexperiment</result>
+         </action>
+         <action name="adminstudents" method="ListStudentsById" class="cn.EMS.action.StudentsAction">
+          <result name="success" type="redirect">adminresetStudentinfo</result>
+         </action>
+		<!--创建实验  -->
+		<action name="ChooseExperimentsCate" class="cn.EMS.action.ExperimentsAction" method="ChooseExperimentsCate" >
+			<result name="success" type="redirect">addexperiment1</result>
+		</action>
+		<action name="Add1Experiments" class="cn.EMS.action.ExperimentsAction" method="Add1Experiments" >
+			<result name="success" type="redirect">addexperiment2</result>
+		</action>
+		<action name="Add2Experiments" class="cn.EMS.action.ExperimentsAction" method="Add2Experiments" >
+			<result name="Add2Experiments" type="json"></result>
+		</action>
+		<action name="Add3Experiments" class="cn.EMS.action.ExperimentsAction" method="Add3Experiments" >
+			<result name="Add3Experiments" type="json"></result>
+		</action>
+		<action name="add4Experiments" class="cn.EMS.action.ExperimentsAction" method="Add4Experiments" >
+			<result name="success" type="redirect">experimentinfo</result>
+		</action>
+		<action name="AddScreenings" class="cn.EMS.action.Experiments_screeningsAction" method="add" >
+			<result name="add" type="json">
+			  <param name="root">jsonMap</param>
+			  </result>
+		</action>
+		
+		
+		<!--输出实验  -->
+		<action name="ListAllExperiments" class="cn.EMS.action.ExperimentsAction" method="ListAllExperiments" >
+			<result name="ListAllExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListAllExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListAllExperiments1" >
+			<result name="ListAllExperiments1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListAllExperiments2" class="cn.EMS.action.ExperimentsAction" method="ListAllExperiments2" >
+			<result name="success" type="redirect">teachersexperiment</result>
+		</action>
+		<action name="ListAllExperiments3" class="cn.EMS.action.ExperimentsAction" method="ListAllExperiments2" >
+			<result name="success" type="redirect">studentsallexperiment</result>
+		</action>
+		<action name="ListAllExperiments4" class="cn.EMS.action.ExperimentsAction" method="ListAllExperiments2" >
+			<result name="success" type="redirect">adminallexperiment</result>
+		</action>
+		<action name="ListActiveExperiments" class="cn.EMS.action.ExperimentsAction" method="ListActiveExperiments" >
+			<result name="ListActiveExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListActiveExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListActiveExperiments1" >
+			<result name="ListActiveExperiments1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListUnactiveExperiments" class="cn.EMS.action.ExperimentsAction" method="ListUnactiveExperiments" >
+			<result name="ListUnactiveExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListUnactiveExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListUnactiveExperiments1" >
+			<result name="ListUnactiveExperiments1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListStudentByScreening" class="cn.EMS.action.ExperimentsAction" method="ListStudentByScreenings" >
+			<result name="ListStudentByScreenings" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListCanStudents" class="cn.EMS.action.ExperimentsAction" method="ListCanStudents" >
+			<result name="ListCanStudents" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="AddStudents" class="cn.EMS.action.ExperimentsAction" method="AddStudents" >
+			<result name="AddStudents" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="DeleteStudents" class="cn.EMS.action.ExperimentsAction" method="DeleteStudents" >
+			<result name="DeleteStudents" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="UpdateExperiments" class="cn.EMS.action.ExperimentsAction" method="UpdateExperiments" >
+			<result name="UpdateExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+
+		<action name="JoinExperiments1" class="cn.EMS.action.ExperimentsAction" method="JoinExperiments" >
+			<result name="JoinExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+
+		<action name="ListOneExperiments" class="cn.EMS.action.ExperimentsAction" method="ListOneExperiments" >
+			<result name="success" type="redirect">experimentinfo</result>
+		</action>
+		
+		<action name="ListOneExperiments3" class="cn.EMS.action.ExperimentsAction" method="ListOneExperiments" >
+			<result name="success" type="redirect">completeexperiment</result>
+		</action>
+
+		<action name="ListOneExperiments2" class="cn.EMS.action.ExperimentsAction" method="ListOneExperiments1" >
+			<result name="success" >WEB-INF/content/studentsexperimentinfo.jsp</result>
+		</action>
+
+		<action name="ListOneExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListOneExperiments" >
+			<result name="success" >WEB-INF/content/updateexperiment.jsp</result>
+		</action>
+		
+		<action name="ListOneExperiments4" class="cn.EMS.action.ExperimentsAction" method="ListOneExperiments2" >
+			<result name="success" >WEB-INF/content/adminsexperimentinfo.jsp</result>
+		</action>
+		
+		<action name="ListResentExperiments" class="cn.EMS.action.ExperimentsAction" method="ListResentExperiments" >
+			<result name="success" type="redirect">teacherindex</result>
+		</action>
+		<action name="ListTeacherExperiments" class="cn.EMS.action.ExperimentsAction" method="ListTeacherExperiments" >
+			<result name="success" type="redirect">myexperiment</result>
+		</action>
+		<action name="ListTeacherExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListTeacherExperiments1" >
+			<result name="ListTeacherExperiments1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="CompleteExperiments" class="cn.EMS.action.ExperimentsAction" method="CompleteExperiments" >
+			<result name="success" type="chain">ListTeacherExperiments</result>
+		</action>
+
+		<action name="ListJOinExperiments" class="cn.EMS.action.ExperimentsAction" method="ListJOinExperiments" >
+			<result name="success" type="redirect">studentsexperiment</result>
+		</action>
+		<action name="ListJOinExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListJOinExperiments1" >
+			<result name="ListJOinExperiments1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListJOinedExperiments" class="cn.EMS.action.ExperimentsAction" method="ListJOinedExperiments" >
+			<result name="ListJOinedExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListJOinedExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListJOinedExperiments1" >
+			<result name="ListJOinedExperiments1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListunJOinExperiments" class="cn.EMS.action.ExperimentsAction" method="ListunJOinExperiments" >
+			<result name="ListunJOinExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListunJOinExperiments1" class="cn.EMS.action.ExperimentsAction" method="ListunJOinExperiments1" >
+			<result name="ListunJOinExperiments1" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="ListStudentsResent" class="cn.EMS.action.ExperimentsAction" method="ListStudentsResent" >
+			<result name="success" type="redirect">studentsmain</result>
+		</action>
+		<action name="PrintStudent" class="cn.EMS.action.ExperimentsAction" method="PrintStudents" >
+			<result name="success" type="redirect">printstudents</result>
+			<result name="error" type="redirect">printstudents</result>
+		</action>
+		<action name="deleteScreenings" class="cn.EMS.action.Experiments_screeningsAction" method="deleteScreenings" >
+			<result name="deleteScreenings" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="reScreenings" class="cn.EMS.action.Experiments_screeningsAction" method="reScreenings" >
+			<result name="reScreenings" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		
+		
+		<action name="testEmail" class="cn.EMS.action.StudentsAction" method="testEmail" >
+			<result name="testEmail" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		
+		<action name="deleteExperiments" class="cn.EMS.action.ExperimentsAction" method="deleteExperiemnts" >
+			<result name="deleteExperiemnts" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="pubExperiments" class="cn.EMS.action.ExperimentsAction" method="PubExperiments" >
+			<result name="pubExperiments" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="addScreenings1" class="cn.EMS.action.Experiments_screeningsAction" method="addScreenings" >
+			<result name="addScreenings" type="json">
+			  <param name="root">jsonMap</param>
+			  </result>
+		</action>
+		
+		<action name="a" class="cn.EMS.action.ExperimentsAction" method="a" >
+
+			<result name="success" type="redirect">addexperiment4</result>
+		</action>
+		<action name="printallstudent" class="cn.EMS.action.ExperimentsAction" method="printAll" >
+			<result name="success" >WEB-INF/content/printallstudent.jsp</result>
+		</action>
+		<action name="ListactiveExperiments3" class="cn.EMS.action.ExperimentsAction" method="ListActiveExperiments" >
+			<result name="ListActiveExperiments" >WEB-INF/content/studentsallexperiment.jsp</result>
+		</action>
+		<action name="printsPay" class="cn.EMS.action.ExperimentsAction" method="printsPay" >
+			<result name="printsPay" type="json">
+			  <param name="root">jsonMap</param>
+			</result>
+		</action>					
+		<action name="*">
+			<result>WEB-INF/content/{1}.jsp</result>
+		</action>
+	</package>
+		
+				
+	
+	
+</struts>
+
