@@ -2,6 +2,7 @@ package cn.EMS.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,10 +16,11 @@ public class Experiments_Limit implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int rowid;
 	private int id;
 	private int experiments_id;
 	
-	@Id
+	@Column
 	public int getId() {
 		return id;
 	}
@@ -26,12 +28,21 @@ public class Experiments_Limit implements Serializable{
 		this.id = id;
 	}
 	
-	@Id
+	@Column
 	public int getExperiments_id() {
 		return experiments_id;
 	}
 	public void setExperiments_id(int experiments_id) {
 		this.experiments_id = experiments_id;
+	}
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public int getRowid() {
+		return rowid;
+	}
+	public void setRowid(int rowid) {
+		this.rowid = rowid;
 	}
 	
 	

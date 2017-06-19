@@ -2,6 +2,8 @@ package cn.EMS.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,11 +19,12 @@ public class Experiments_unjoinstudents implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int rowid;
 	private int experiments_id;
 	private int students_id;
 	private String reason;
 	
-	@Id
+	@Column
 	public int getExperiments_id() {
 		return experiments_id;
 	}
@@ -29,7 +32,7 @@ public class Experiments_unjoinstudents implements Serializable{
 		this.experiments_id = experiments_id;
 	}
 	
-	@Id
+	@Column
 	public int getStudents_id() {
 		return students_id;
 	}
@@ -45,7 +48,14 @@ public class Experiments_unjoinstudents implements Serializable{
 		this.reason = reason;
 	}
 	
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public int getRowid() {
+		return rowid;
+	}
+	public void setRowid(int rowid) {
+		this.rowid = rowid;
+	}
 	
 	
 }
