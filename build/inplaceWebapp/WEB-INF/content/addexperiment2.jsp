@@ -171,7 +171,70 @@ $(function(){
     });
 });
 </script>
-
+<script type="text/javascript">
+//下拉框交换JQuery
+$(function(){
+    //移到右边
+    $('#addthree').click(function() {
+    //获取选中的选项，删除并追加给对方
+        $('#select6 option:selected').appendTo('#select4');
+    });
+    //移到左边
+    $('#removethree').click(function() {
+        $('#select4 option:selected').appendTo('#select6');
+    });
+    //全部移到右边
+    $('#add_allthree').click(function() {
+        //获取全部的选项,删除并追加给对方
+        $('#select6 option').appendTo('#select4');
+    });
+    //全部移到左边
+    $('#remove_allthree').click(function() {
+        $('#select4 option').appendTo('#select6');
+    });
+    //双击选项
+    $('#select6').dblclick(function(){ //绑定双击事件
+        //获取全部的选项,删除并追加给对方
+        $("option:selected",this).appendTo('#select4'); //追加给对方
+    });
+    //双击选项
+    $('#select4').dblclick(function(){
+       $("option:selected",this).appendTo('#select6');
+    });
+});
+</script>
+<script type="text/javascript">
+//下拉框交换JQuery
+$(function(){
+    //移到右边
+    $('#addfive').click(function() {
+    //获取选中的选项，删除并追加给对方
+        $('#select7 option:selected').appendTo('#select8');
+    });
+    //移到左边
+    $('#removefive').click(function() {
+        $('#select8 option:selected').appendTo('#select7');
+    });
+    //全部移到右边
+    $('#add_allfive').click(function() {
+        //获取全部的选项,删除并追加给对方
+        $('#select7 option').appendTo('#select8');
+    });
+    //全部移到左边
+    $('#remove_allfive').click(function() {
+        $('#select8 option').appendTo('#select7');
+    });
+    //双击选项
+    $('#select7').dblclick(function(){ //绑定双击事件
+        //获取全部的选项,删除并追加给对方
+        $("option:selected",this).appendTo('#select8'); //追加给对方
+    });
+    //双击选项
+    $('#select8').dblclick(function(){
+       $("option:selected",this).appendTo('#select7');
+    });
+});
+</script>
 
   <style>
             /* Tagline and Background Image */
@@ -462,14 +525,102 @@ $(function(){
 		
             <div>
             <br>
-                 <p style="font-size:17px;">&nbsp;&nbsp;第二步：指定限制实验和前置实验</p>
+                 <p style="font-size:17px;">&nbsp;&nbsp;第二步：筛选学校并指定限制实验、前置实验</p>
                 <hr class="hrhr" />
-                <p style="font-size:16px;font-family:微软雅黑;"> &emsp;&emsp;&emsp;&emsp;<small>此步骤您需要指定此实验的前置实验和限制实验。</small></b>
+                <p style="font-size:16px;font-family:微软雅黑;"> &emsp;&emsp;&emsp;&emsp;<small>此步骤您需要指定此实验的前置实验、限制实验和实验学校。</small></b>
                         <hr class="hrhr"/>
             </div>
             <div>
                 
                     <h3></h3>
+                                   
+                   <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label " style="text-align:left"><p style="font-size:17px;">&nbsp;&nbsp;选择学校:</p></label>
+                        <div class="col-sm-9">     
+                        <br>                      
+                            <div>                                        
+                                       
+                            </div><br>
+                            <div>
+                                    <button class="btn btn-default" type="button">所有学校</button>
+                            </div><br>                      
+                            <div class="col-sm-5" id="div3">
+                            <p style="font-size:16px;font-family:微软雅黑;">可选</p>
+                           <select multiple="multiple" style="width:275px;font-size:16px" id="select7" class="selectpicker"  size="15">
+                                   
+                                   <c:forEach items="${sessionScope.allUniversity}" var="allUniversity">
+										<option onmouseover="f1(this);" onmouseout="f2(this);" value ="${allUniversity.university}">${allUniversity.university}</option> 				
+									</c:forEach>
+                                </select>
+                                
+                            </div>
+                            <div class="col-sm-5" style="display:none;" id="div4">
+                             <p style="font-size:16px;font-family:微软雅黑;">可选</p>
+                            <select multiple="multiple" style="width:275px;font-size:16px" id="select6" class="form-control"  size="15">
+                                  
+                                    
+										<option value =""></option> 				
+								
+                                </select>
+                               
+                            </div>
+                                <div class="col-sm-2" id="div7">
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                    <span id="addfive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value=">"/>
+                                        </span><br />
+                                        <br>
+                                        <span id="add_allfive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value=">>"/>
+                                        </span> <br />
+                                        <br>
+                                        <span id="removefive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value="<"/>
+                                        </span><br />
+                                        <br>
+                                        <span id="remove_allfive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value="<<"/>
+                                        </span>
+                                </div>
+                                <div class="col-sm-2" style="display:none;" id="div8">
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                		<br>
+                                    <span id="addfive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value=">"/>
+                                        </span><br />
+                                        <br>
+                                        <span id="add_allfive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value=">>"/>
+                                        </span> <br />
+                                        <br>
+                                        <span id="removefive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value="<"/>
+                                        </span><br />
+                                        <br>
+                                        <span id="remove_allfive">
+                                        <input type="button" style="width:60px;font-family:微软雅黑;" class="btn btn-default" value="<<"/>
+                                        </span>
+                                </div>
+                                <div class="col-sm-5" id="div11">
+                                <p style="font-size:16px;font-family:微软雅黑;">已选</p>
+                                <select multiple="multiple" style="width:275px;font-size:16px" id="select8" class="form-control" name="university" size="15">
+                                </select>
+                                
+                                </div><br>
+                        </div>                   
+                    </div>       
+                       <hr class="hrhr" />           
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label " style="text-align:left"><p style="font-size:17px;">&nbsp;&nbsp;前置实验:</p></label>
                         <div class="col-sm-9">                           
@@ -574,7 +725,7 @@ $(function(){
                     </div>
                    <br>
                     <hr class="hrhr" />  
-                                        <div class="form-group">
+                   <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label " style="text-align:left"><p style="font-size:17px;">&nbsp;&nbsp;限制实验:</p></label>
                         <div class="col-sm-9">     
                         <br>                      
@@ -662,7 +813,6 @@ $(function(){
                                 </div><br>
                         </div>                   
                     </div>
-                                   
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-3 control-label " style="text-align:left"><h3></h3></label>
                     
@@ -820,6 +970,7 @@ function f2(obj){
 function sendForm(){
 	var limit=new Array();
 	var front=new Array();
+	var university=new Array();
 	var frontcate=$('input:radio:checked').val();
 	console.log(frontcate);
 	$('#select4 option').each(function(){
@@ -830,10 +981,14 @@ function sendForm(){
 		var f =$(this).val();
 		front.push(f)
 	});
+	$('#select8 option').each(function(){
+		var u =$(this).val();
+		university.push(u)
+	});
 	$.ajax({
 		   url:'Add2Experiments',// 跳转到 action 
 		   data:{
-			   limit:limit,front:front,frontcate:frontcate
+			   limit:limit,front:front,frontcate:frontcate,university:university
 		   },
 		    type:'post',  
 		    cache:false,  

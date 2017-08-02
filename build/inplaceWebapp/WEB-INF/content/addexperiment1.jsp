@@ -393,7 +393,7 @@
                 <div class="form-group">
                      <label for="inputPassword3" class="col-sm-2 control-label " style="text-align:center"><p style="font-size:16px;">支付学分<br></p></label>
                      <div class="col-sm-6">
-                           <input type="text" name="credit" class="form-control" id="inputPassword3" placeholder="1"  onblur="this.v();" required="required"/><br>
+                           <input type="text" name="credit" class="form-control" id="inputPassword3" placeholder="请填写数字，例如:1"  onblur="this.v();" required="required"/><br>
                      </div>
                 </div>
                 </c:if>
@@ -401,7 +401,7 @@
                 <div class="form-group">
                      <label for="inputPassword3" class="col-sm-2 control-label " style="text-align:center"><p style="font-size:16px;">支付金额<br></p></label>
                      <div class="col-sm-6">
-                           <input type="text" name="pay" class="form-control" id="inputPassword3" placeholder="1"  required="required"/><br>
+                           <input type="text" name="pay" class="form-control" id="inputPassword3" placeholder="请填写数字，例如:1"  required="required"/><br>
                      </div>
                 </div>
                 </c:if>
@@ -565,6 +565,38 @@
 
 		                }
 		            },
+		            pay: {
+		                validators: {
+		                    stringLength: {
+		                        message: '金额为数字'
+								/* 根据实际情况设置 */
+		                    },
+		                    notEmpty: {
+		                        message: '金额不能为空'
+		                    },
+		                    regexp: {
+		                        enabled: true,
+		                        regexp: /^[0-9]+$/i,
+		                        message: '请正确输入金额'
+		                    }
+		                }
+		            }, 
+		            credit: {
+		                validators: {
+		                    stringLength: {
+		                        message: '学分为数字'
+								/* 根据实际情况设置 */
+		                    },
+		                    notEmpty: {
+		                        message: '学分不能为空'
+		                    },
+		                    regexp: {
+		                        enabled: true,
+		                        regexp: /^[0-9]+$/i,
+		                        message: '请正确输入学分'
+		                    }
+		                }
+		            }, 
 		            principals: {
 		                validators: {
 		                    stringLength: {

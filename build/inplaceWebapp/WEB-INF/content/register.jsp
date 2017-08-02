@@ -1,6 +1,7 @@
 ﻿<%@ page contentType="text/html; charset=utf-8" language="java"
 	errorPage=""%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head><title>
@@ -399,6 +400,22 @@
 							<div class="control-label col-md-6">
 								<div class="form-group">
 								<input type="password" name="repassword"  id="" class="form-control form-control-inline" placeholder="请再次输入密码" />
+							    </div>
+							</div>
+					</div>
+					 <div class="row">
+                        <div class="control-label col-md-2">
+								<label>学校</label>
+						</div>
+
+							<div class="row">&nbsp;</div>
+							<div class="control-label col-md-6">
+								<div class="form-group">
+								<select name="university" form ="defaultForm" class="form-control form-control-inline">
+                                  <c:forEach items="${sessionScope.university}" var="alluniversity">		
+                                  <option value="${alluniversity.university}">${alluniversity.university}</option>
+                                  </c:forEach>
+                               </select>
 							    </div>
 							</div>
 					</div>

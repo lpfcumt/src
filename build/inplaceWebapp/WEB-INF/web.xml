@@ -2,6 +2,33 @@
 <web-app id="WebApp_9" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+         
+     <!-- 微信接入servlet -->
+  	  <servlet>
+	    <servlet-name>WeiXinServlet</servlet-name>
+	    <servlet-class>cn.EMS.wx.servelet.WeiXinServlet</servlet-class>
+<!-- 	    <init-param> -->
+<!-- 	        <param-name>appid</param-name> -->
+<!-- 	        <param-value>wx8da4fbb4e305e658</param-value> -->
+<!-- 	    </init-param> -->
+<!-- 	    <init-param> -->
+<!-- 	        <param-name>appsecret</param-name> -->
+<!-- 	        <param-value>278bb68eff2b71070a72f5110fe4cc11</param-value> -->
+<!-- 	    </init-param> -->
+	    <init-param>
+	        <param-name>appid</param-name>
+	        <param-value>wx842bb4a4ad150525</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>appsecret</param-name>
+	        <param-value>90d4d9151a63c345fed806c45e920423</param-value>
+	    </init-param>
+	  </servlet>
+	
+  	<servlet-mapping>
+	    <servlet-name>WeiXinServlet</servlet-name>
+	    <url-pattern>/WeiXinServlet.do</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>

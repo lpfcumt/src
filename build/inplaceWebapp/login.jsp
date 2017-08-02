@@ -365,7 +365,7 @@
 
                     
                         <strong></strong>
-				        <a class="btn btn-info btn-block" href="beforeregister">学生注册</a>
+				        <a class="btn btn-info btn-block" href="getCollege">学生注册</a>
                     
                 </div>
             </section>

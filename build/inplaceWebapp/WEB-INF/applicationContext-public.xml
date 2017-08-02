@@ -50,6 +50,7 @@
 				<value>cn.EMS.model.Experiments</value>
 				<value>cn.EMS.model.Students</value>
 				<value>cn.EMS.model.Teachers</value>
+				<value>cn.EMS.model.University</value>
 				<!--  
 				<value>cn.JMN.model.Users</value>
 				<value>cn.JMN.model.Usersproject</value>

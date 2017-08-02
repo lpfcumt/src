@@ -49,7 +49,12 @@
     				<param name="actionName">ListStudentsResent</param> 
 			    </result>
 		</action>
-		
+	<!--得到大学  -->
+		<action name="getCollege" class="cn.EMS.action.StudentsAction"  method="getRegister" >
+
+			<result name="success" type="redirect">beforeregister</result>
+
+		</action>
 		<action name="addstudent" class="cn.EMS.action.StudentsAction"  method="StudentsRegister" >
 
 			<result name="success" type="redirect">login</result>

@@ -417,6 +417,7 @@
 					  		<tr>
 					  			<th style="vertical-align:middle; text-align:center;">姓名</th>
 					  			<th style="vertical-align:middle; text-align:center;">学号</th>
+					  			<th style="vertical-align:middle; text-align:center;">学校</th>
 					  			<th style="vertical-align:middle; text-align:center;">班级</th>
 					  			<th style="vertical-align:middle; text-align:center;">电话</th>
 					  			<th style="vertical-align:middle; text-align:center;">备注</th>
@@ -427,7 +428,7 @@
 					  		<tr>
 					  			<td style="vertical-align:middle; text-align:center;">${liststudents2.name}</td>
 					  			<td style="vertical-align:middle; text-align:center;">${liststudents2.students_id}</td>
-					  			
+					  			<td style="vertical-align:middle; text-align:center;">${liststudents2.university}</td>
 					  			<td style="vertical-align:middle; text-align:center;">${liststudents2.grade}-${liststudents2.major}</td>
 					  			<td style="vertical-align:middle; text-align:center;">${liststudents2.tel}</td>
 					  			<td style="vertical-align:middle; text-align:center;"></td>
